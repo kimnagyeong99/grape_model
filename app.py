@@ -10,16 +10,16 @@ np.set_printoptions(suppress=True)
 model = load_model('keras_model.h5', compile=False)
 
 # Load the labels
-class_names = open('labels.txt', 'r').readlines()
+class_names = open('labels.txt', 'r', encoding='utf-8').readlines()
 
-st.header('마스크 판별기')
+st.header('🍇포도 판별기🍇')
 # Create the array of the right shape to feed into the keras model
 # The 'length' or number of images you can put into the array is
 # determined by the first position in the shape tuple, in this case 1.
 # 들어온 이미지를 224 x 224 x 3차원으로 변환하기 위해서 빈 벡터를 만들어 놓음
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-img_file_buffer = st.camera_input("정중앙에 사물을 위치하고 사진찍기 버튼을 누르세요")
+img_file_buffer = st.file_uploader("이미지를 업로드하세요", type=["jpg", "png", "jpeg"])
 
 if img_file_buffer is not None:
     # # To read image file buffer as a PIL Image:
